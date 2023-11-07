@@ -101,6 +101,8 @@ int _help(info_t *information);
 int _exit(info_t *information);
 int _alias(info_t *information);
 int _history(info_t *information);
+int alias_unset(info_t *information, char *string);
+int alias_set(info_t *information, char *string);
 int build_hist(info_t *info_det, char *buffer, int count);
 int wr_hist(info_t *info_det);
 int rd_hist(info_t *info_det);
