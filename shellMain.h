@@ -17,6 +17,7 @@
 #define COMMAND_OR 1
 #define COMMAND_AND 2
 #define COMMAND_CHAIN 3
+#define UNSIGNED 2
 #define LOWERCASE 1
 #define UPPERCASE 2
 #define HISTORY_FILE ".shell_history"
@@ -91,11 +92,11 @@ int _atoi(char *string);
 int _delimiter(char c, char *delimiter);
 int is_alpha(int);
 int interact(info_t *info);
-void rem_comment(char *);
-int _print_d(int, int);
-char convert_int(long int, int, int);
-int _err_atoi(char *);
-void print_err(info_t *, char *);
+void rem_comment(char *buffer);
+int _print_d(int user_input, int file_des);
+char *_itoa(long int number, int a, int flag);
+int _err_atoi(char *c);
+void print_err(info_t *information, char *c);
 int _cd(info_t *information);
 int _help(info_t *information);
 int _exit(info_t *information);

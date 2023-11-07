@@ -20,6 +20,35 @@ int err_putchar(char c)
 	return (1);
 }
 /**
+ * _err_atoi - function changes string to number
+ * @c: character pointer parameter
+ *
+ * Return: integer
+ */
+int _err_atoi(char *c)
+{
+	unsigned long int output;
+	int i;
+
+	result = 0;
+	i = 0;
+	if (*c == '+')
+		c++;
+	for (i = 0; c[i] != '\0'; i++)
+	{
+		if (c[i] >= '0' && c[i] <= '9')
+		{
+			output *= 10;
+			output += (c[i] - '0');
+			if (output > INT_MAX)
+				return (-1);
+		}
+		else
+			return (-1);
+	}
+	return (output);
+}
+/**
  * err_puts - function to print str
  * @string: pointer parameter to string
  *
