@@ -1,4 +1,4 @@
-#include "shellMain.h"
+#include "Alpha.h"
 /**
  * interact - checks if shell is in interactive mode
  * @info: info address

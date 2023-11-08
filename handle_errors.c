@@ -1,4 +1,4 @@
-#include "shellMain.h"
+#include "Alpha.h"
 /**
  * err_putchar -  function to print error for char
  * @c: character parameter
