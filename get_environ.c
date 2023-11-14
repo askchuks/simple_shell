@@ -19,18 +19,18 @@ int _env(info_t *information)
  */
 char get_environ(info_t information, const char *var_name)
 {
-	list_t *n;
+	list_t *i;
 	char *c;
 
-	n = information->env;
-	while (n)
+	i = information->env;
+	while (i)
 	{
-		c = start(n->string, var_name);
+		c = start(i->string, var_name);
 		if (c && *c)
 			return (c);
-		n = n->next;
+		i = i->next;
 	}
-	return (NULL);
+	return (i);
 }
 /**
  * env_unset - function to unset environ variable
@@ -48,7 +48,7 @@ int env_unset(info_t *information)
 		return (1);
 	}
 	for (i = 1; i <= information->argc; i++)
-		unset_env(information, information->argv[i]);
+		env_unset(information, information->argv[i]);
 	return (0);
 }
 /**
@@ -64,7 +64,7 @@ int env_set(info_t *information)
 		err_puts("wrong argument number\n");
 		return (1);
 	}
-	if (set_env(information, information->argv[1], information->argv[2]))
+	if (env_set(information, information->argv[1], information->argv[2]))
 		return (0);
 	return (1);
 }
@@ -80,7 +80,7 @@ int pop_env(info_t *information)
 	size_t j;
 
 	i = NULL;
-	for (j = 0; environ[i]; i++)
+	for (j = 0; environ[j]; j++)
 		add_node_2(&i, environ[j], 0);
 	information->env = i;
 	return (0);

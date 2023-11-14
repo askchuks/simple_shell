@@ -49,7 +49,7 @@ int alias_unset(info_t *information, char *string)
  */
 int alias_printing(list_t *node)
 {
-	char *c, *d, *string;
+	char *c, *d;
 
 	c = NULL;
 	d = NULL;

@@ -15,11 +15,14 @@ int _cd(info_t *information)
 		_puts("getcwd error\n");
 	if (!information->argv[1])
 	{
-		direc = get_env(information, "HOME");
+		direc = get_env(information, "HOME=");
 		if (!direc)
-			chdirec((direc = get_env(information, "PWD")) ? direc : "/");
+		{
+			chdir = /*something*/
+			chdirec((direc = get_env(information, "PWD=")) ? direc : "/");
+		}
 		else
-			chdirec = chdir(dir);
+			chdirec = chdir(direc);
 	}
 	else if (_strcmp(information->argv[1], "-") == 0)
 	{
@@ -33,7 +36,7 @@ int _cd(info_t *information)
 		chdirec((dir = get_env(information, "OLDPWD=")) ? direc : "/");
 	}
 	else
-		chdirec = chdir(info->argv[1]);
+		chdirec = chdir(information->argv[1]);
 	if (chdirec == -1)
 	{
 		print_err(information, "cannot cd to");
@@ -52,7 +55,7 @@ int _cd(info_t *information)
  *
  * Return: integer
  */
-int _exit(info_t *information)
+int __exit(info_t *information)
 {
 	int check_exit;
 
@@ -61,7 +64,7 @@ int _exit(info_t *information)
 		check_exit = _err_atoi(information->argv[1]);
 		if (check_exit == -1)
 		{
-			info->status = 2;
+			information->status = 2;
 			print_err(information, "error: ");
 			err_puts(information->argv[1]);
 			err_putchar('\n');
@@ -81,7 +84,7 @@ int _exit(info_t *information)
  */
 int _help(info_t *information)
 {
-	char *arg;
+	char **arg;
 
 	arg = information->argv;
 	_puts("function not implemented\n");
@@ -120,7 +123,7 @@ int _alias(info_t *information)
 		j = information->alias;
 		while (j)
 		{
-			print_alias(j);
+			printAlias(j);
 			j = j->next;
 		}
 		return (0);
@@ -129,9 +132,9 @@ int _alias(info_t *information)
 	{
 		c = _strchr(information->argv[i], '=');
 		if (c)
-			_set_alias(information->argv[i]);
+			alias_set(information->argv[i]);
 		else
-			print_alias(start_node(information->alias, information->argv[i], '='));
+			printAlias(start_node(information->alias, information->argv[i], '='));
 	}
 	return (0);
 }

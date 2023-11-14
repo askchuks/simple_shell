@@ -1,16 +1,41 @@
 #include "Alpha.h"
 /**
-* creating my entry point of shell
-* to display, execute and read command
-*/
-Int main(void)
+ * main - main function
+ * @argc: argument count
+ * @argv: pointer parameter
+ */
+int main(int argc, char **argv)
 {
-char command [180];
-While (true or 1)
-{
-display_prompt ();
-read_command ( command, sizeof (command));
-execute_command (const char *command);
-}
-return (0);
+	info_t information[] = {INFO_INIT};
+	int file_des;
+
+	file_des = 2;
+	asm ("mov %1, %0\n\t"
+			"add $3, %0"
+			: "=r" (file_des)
+			: "r" (file_des));
+	if (argc == 2)
+	{
+		file_des = open(argv[1], O_RDONLY);
+		if (file_des == -1)
+		{
+			if (errno == EACCES)
+				exit(126);
+			if (errno == ENOENT)
+			{
+				err_puts(argv[0]);
+				err_puts(":0:Can't open file");
+				err_puts(argv[1]);
+				err_putchar('\n');
+				err_putchar(BUFFER_FLUSH);
+				exit(127);
+			}
+			return (EXIT_FAILURE);
+		}
+		information->read_fd = file_des;
+	}
+	populate_env(information);
+	read_his(information);
+	hsh(information, argv);
+	return (EXIT_SUCCESS);
 }

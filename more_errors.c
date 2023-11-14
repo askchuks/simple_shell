@@ -47,7 +47,7 @@ int _print_d(int user_input, int file_des)
 	int j, counter;
 	unsigned int ab, present;
 
-	int (*$_putchar)(char) = _putchar;
+	int (*_putchar)(char) = _putchar;
 
 	counter = 0;
 	if (file_des == STDERR_FILENO)
@@ -61,7 +61,7 @@ int _print_d(int user_input, int file_des)
 	else
 		ab = user_input;
 	present = ab;
-	for (j = 1000000000, j > 1; i /= 10)
+	for (j = 1000000000; j > 1; i /= 10)
 	{
 		if (ab / j)
 		{
