@@ -19,12 +19,12 @@ int _cd(info_t *information)
 		if (!direc)
 		{
 			chdir = /*something*/
-			chdirec((direc = get_env(information, "PWD=")) ? direc : "/");
+			chdir((direc = get_env(information, "PWD=")) ? direc : "/");
 		}
 		else
 			chdirec = chdir(direc);
 	}
-	else if (_strcmp(information->argv[1], "-") == 0)
+	else if (_strcmp(information->(char)argv[1], "-") == 0)
 	{
 		if (!get_env(information, "OLDPWD="))
 		{
@@ -33,10 +33,10 @@ int _cd(info_t *information)
 			return (1);
 		}
 		_puts(get_env(information, "OLDPWD=")), _putchar('\n');
-		chdirec((dir = get_env(information, "OLDPWD=")) ? direc : "/");
+		chdir((direc = get_env(information, "OLDPWD=")) ? direc : "/");
 	}
 	else
-		chdirec = chdir(information->argv[1]);
+		chdirec = chdir(information->(char *)argv[1]);
 	if (chdirec == -1)
 	{
 		print_err(information, "cannot cd to");
@@ -50,7 +50,7 @@ int _cd(info_t *information)
 	return (0);
 }
 /**
- * _exit - function to exit shell
+ * __exit - function to exit shell
  * @information: pointer parameter
  *
  * Return: integer
@@ -61,19 +61,19 @@ int __exit(info_t *information)
 
 	if (information->argv[1])
 	{
-		check_exit = _err_atoi(information->argv[1]);
+		check_exit = _err_atoi(information->(char)argv[1]);
 		if (check_exit == -1)
 		{
-			information->status = 2;
+			information->stat = 2;
 			print_err(information, "error: ");
-			err_puts(information->argv[1]);
+			err_puts(information->(char)argv[1]);
 			err_putchar('\n');
 			return (1);
 		}
 		information->error_number = _err_atoi(information->argv[1]);
 		return (-2);
 	}
-	info->error_number = -1;
+	infomation->error_number = -1;
 	return (-2);
 }
 /**
@@ -84,7 +84,7 @@ int __exit(info_t *information)
  */
 int _help(info_t *information)
 {
-	char **arg;
+	char *arg;
 
 	arg = information->argv;
 	_puts("function not implemented\n");
@@ -130,11 +130,11 @@ int _alias(info_t *information)
 	}
 	for (i = 1; information->argv[i]; i++)
 	{
-		c = _strchr(information->argv[i], '=');
+		c = _strchr(information->(char)argv[i], '=');
 		if (c)
-			alias_set(information->argv[i]);
+			alias_set(information, information->argv(char)[i]);
 		else
-			printAlias(start_node(information->alias, information->argv[i], '='));
+			printAlias(node_starts_with(information->alias, information->argv[i], '='));
 	}
 	return (0);
 }

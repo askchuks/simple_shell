@@ -12,7 +12,7 @@ void print_err(info_t *information, char *c)
 	err_puts(": ");
 	_print_d(information->count, STDERR_FILENO);
 	err_puts(": ");
-	err_puts(information->argv[0]);
+	err_puts(information->argv(char)[0]);
 	err_puts(": ");
 	err_puts(c);
 }
@@ -28,7 +28,7 @@ void rem_comment(char *buffer)
 
 	for (j = 0; buffer[j] != '\0'; j++)
 	{
-		if (buffer[j] == '#' && (!j || buffer(j - 1) == ' '))
+		if (buffer[j] == '#' && (!j || buffer[j - 1] == ' '))
 		{
 			buffer[j] = '\0';
 			break;
@@ -47,30 +47,30 @@ int _print_d(int user_input, int file_des)
 	int j, counter;
 	unsigned int ab, present;
 
-	int (*_putchar)(char) = _putchar;
+	int (*__putchar)(char) = _putchar;
 
 	counter = 0;
 	if (file_des == STDERR_FILENO)
-		$_putchar = err_putchar;
+		__putchar = err_putchar;
 	if (user_input < 0)
 	{
 		ab = -user_input;
-		$_putchar('-');
+		__putchar('-');
 		counter++;
 	}
 	else
 		ab = user_input;
 	present = ab;
-	for (j = 1000000000; j > 1; i /= 10)
+	for (j = 1000000000; j > 1; j /= 10)
 	{
 		if (ab / j)
 		{
-			$_putchar('0' + present / j);
+			__putchar('0' + present / j);
 			counter++;
 		}
 		present %= j;
 	}
-	$_putchar('0' + present);
+	__putchar('0' + present);
 	counter++;
 	return (counter);
 }
@@ -97,7 +97,7 @@ char *_itoa(long int number, int a, int flag)
 		i = -number;
 		sign = '-';
 	}
-	arr = flag & LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	arr = (flag & LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF");
 	pointer = &buffer[49];
 	*pointer = '\0';
 	do {

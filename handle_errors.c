@@ -30,7 +30,7 @@ int _err_atoi(char *c)
 	unsigned long int output;
 	int i;
 
-	result = 0;
+	output = 0;
 	i = 0;
 	if (*c == '+')
 		c++;

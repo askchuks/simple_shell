@@ -3,6 +3,8 @@
  * main - main function
  * @argc: argument count
  * @argv: pointer parameter
+ *
+ * Return: integer
  */
 int main(int argc, char **argv)
 {
@@ -34,8 +36,8 @@ int main(int argc, char **argv)
 		}
 		information->read_fd = file_des;
 	}
-	populate_env(information);
-	read_his(information);
+	pop_env(information);
+	rd_hist(information);
 	hsh(information, argv);
 	return (EXIT_SUCCESS);
 }

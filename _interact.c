@@ -5,8 +5,10 @@
  *
  * Return: integer
  */
-int interact(info_t *info)
-	return (isatty(STDIN_FILENO) && info->read_fd <= 2);
+int _interact(info_t *information)
+{
+	return (isatty(STDIN_FILENO) && information->read_fd <= 2);
+}
 /**
  * _atoi - function to convert string to number
  * @string: pointer parameter to string

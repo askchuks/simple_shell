@@ -16,7 +16,7 @@ int alias_set(info_t *information, char *string)
 	if (!*++c)
 		return (alias_unset(information, string));
 	alias_unset(information, string);
-	return (add_node_2(&(information->alias), string, 0) == NULL);
+	return (add_node2(&(information->alias), string, 0) == NULL);
 }
 /**
  * alias_unset - function for alias
@@ -36,7 +36,7 @@ int alias_unset(info_t *information, char *string)
 	d = *c;
 	*c = 0;
 	result = del_node(&(information->alias),
-	       get_node(information->alias, start_node(information->alias,
+	       get_nodeindex(information->alias, node_starts_with(information->alias,
 			       string, -1)));
 	*c = d;
 	return (result);
